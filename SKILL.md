@@ -86,7 +86,8 @@ catalog/index.json（调用 store.py）
 ## 创建后
 
 ```powershell
-python <AGLIB_STORE>\catalog\skill-retro\scripts\check_skill.py <AGLIB_STORE>\catalog\my-skill
+# 若你的库带校验脚本，用它检查新条目（路径以你的库为准）
+python <AGLIB_STORE>\scripts\check_skill.py <AGLIB_STORE>\catalog\my-skill
 python <AGLIB_STORE>\scripts\eval_router.py
 ```
 
