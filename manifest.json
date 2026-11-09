@@ -1,0 +1,33 @@
+{
+  "schemaVersion": 1,
+  "id": "agent-library-skill-create",
+  "kind": "skill",
+  "mode": "on-demand",
+  "when": [
+    "用户要做一个 skill / 新建技能 / 把它入库",
+    "要同时创建 manifest、intent、agent 覆盖，但不想手改 JSON",
+    "需要给某个 Agent ignore 或特殊版本"
+  ],
+  "whenNot": [
+    "只是评估已有 skill 的质量",
+    "只是修改某个 skill 的正文，不新建"
+  ],
+  "requires": [
+    "filesystem-read",
+    "filesystem-write",
+    "shell"
+  ],
+  "merge": "shared",
+  "category": "meta",
+  "intents": ["agent-library-skill-create", "create-skill"],
+  "keywords": ["创建 skill", "skill 入库", "manifest", "intent", "ignore", "特殊版本"],
+  "examples": [
+    "做一个 agent-library skill",
+    "帮我把这个流程做成 skill 并入库",
+    "新建 skill，顺便加 intent 和某个 agent 的 ignore"
+  ],
+  "notes": {
+    "script": "scripts/create_skill.py",
+    "default": "all agents visible; no copies"
+  }
+}
