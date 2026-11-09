@@ -16,10 +16,10 @@ from pathlib import Path
 
 # agent-library 根目录的解析顺序：
 #   1. 环境变量 AGLIB_STORE（推荐；换机器/换目录时只改它）
-#   2. 本机习惯路径 D:\agent-library
+#   2. 约定位置 ~/.agent-library
 #   3. 按脚本位置推导：catalog/<id>/scripts/create_skill.py -> 上溯 3 层
 # 也可以在命令行用 --store 直接指定。
-STORE = Path(os.environ.get("AGLIB_STORE") or r"D:\agent-library").expanduser()
+STORE = Path(os.environ.get("AGLIB_STORE") or (Path.home() / ".agent-library")).expanduser()
 if not os.environ.get("AGLIB_STORE") and not (STORE / "catalog").is_dir():
     STORE = Path(__file__).resolve().parents[3]
 CATALOG = STORE / "catalog"
@@ -151,7 +151,7 @@ def main(argv: list[str] | None = None) -> int:
     parser.add_argument(
         "--store",
         default=str(STORE),
-        help="agent-library 根目录；默认 $env:AGLIB_STORE，其次 D:\\agent-library，"
+        help="agent-library 根目录；默认 $env:AGLIB_STORE，其次 ~/.agent-library，"
         "最后按脚本位置推导（需要该目录下存在 catalog/）",
     )
     parser.add_argument("--id", required=True, dest="skill_id")

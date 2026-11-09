@@ -82,7 +82,7 @@ python scripts/create_skill.py --help
 ### 建一个 skill
 
 ```powershell
-# 让脚本自己定位 aglib 根目录（AGLIB_STORE -> D:\agent-library -> 按脚本位置推导）
+# 让脚本自己定位 aglib 根目录（AGLIB_STORE -> ~/.agent-library -> 按脚本位置推导）
 python scripts/create_skill.py `
   --id my-skill `
   --description "一句话说明它做什么、什么时候用" `
@@ -95,10 +95,10 @@ python scripts/create_skill.py `
   --body-file path\to\my-skill.md
 
 # 或者显式指定根目录
-python scripts/create_skill.py --store D:\agent-library --id my-skill --description "..."
+python scripts/create_skill.py --store <AGLIB_STORE> --id my-skill --description "..."
 
 # 先看会写什么，不落盘、不刷索引
-python scripts/create_skill.py --store D:\agent-library --id my-skill --description "..." --dry-run
+python scripts/create_skill.py --store <AGLIB_STORE> --id my-skill --description "..." --dry-run
 ```
 
 不传 `--body-file` / `--body` 时会生成正文骨架，之后编辑
@@ -108,7 +108,7 @@ python scripts/create_skill.py --store D:\agent-library --id my-skill --descript
 
 ```powershell
 python scripts/create_skill.py `
-  --store D:\agent-library `
+  --store <AGLIB_STORE> `
   --id my-local-skill `
   --description "仅在本机验证过的流程" `
   --local-only `
@@ -120,7 +120,7 @@ python scripts/create_skill.py `
 
 | 参数 | 必填 | 默认 | 说明 |
 | --- | --- | --- | --- |
-| `--store` | 否 | `$env:AGLIB_STORE` → `D:\agent-library` → 按脚本位置推导 | agent-library 根目录；该目录下必须存在 `catalog/` |
+| `--store` | 否 | `$env:AGLIB_STORE` → `~/.agent-library` → 按脚本位置推导 | agent-library 根目录；该目录下必须存在 `catalog/` |
 | `--id` | 是 | — | skill id，小写 kebab-case，同时是 `catalog/<id>/` 目录名 |
 | `--description` | 是 | — | 一句话说明它做什么、什么时候用；写入 frontmatter 与 manifest |
 | `--when` | 否 | `--description` | 触发场景，可重复（`action="append"`） |
@@ -170,7 +170,7 @@ python <AGLIB_STORE>\scripts\manage_ui.py   # 可视前端确认路由与展示
 - 不要把 `SKILL.<agent>.ignore` 当成隐藏正文的替代品——它只是路由层的可见性开关；
 - 不要在 skill 正文、`--body-file`、`--variant` 文件里写登录 token、cookie、密钥
   （脚本会拒绝明显密钥，但不要依赖它兜底）；
-- 不要把 `D:\agent-library` 当作唯一路径写死在流程里，用 `AGLIB_STORE` / `--store`。
+- 不要把某个固定路径当作唯一路径写死在流程里，用 `AGLIB_STORE` / `--store`。
 
 ## 与 agent-library 的关系
 

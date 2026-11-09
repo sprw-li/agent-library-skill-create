@@ -27,11 +27,11 @@ python scripts/create_skill.py `
 ```
 
 脚本用环境变量 `AGLIB_STORE` 或参数 `--store` 定位 agent-library 根目录；
-两者都没给时回退到本机默认路径 `D:\agent-library`，再回退到按脚本位置推导。
+两者都没给时先试约定位置 `~/.agent-library`，再回退到按脚本位置推导。
 换机器时只设环境变量即可：
 
 ```powershell
-$env:AGLIB_STORE = 'D:\agent-library'   # 或 --store D:\agent-library
+$env:AGLIB_STORE = '<AGLIB_STORE>'   # 例如 ~/.agent-library；也可用 --store <AGLIB_STORE>
 ```
 
 不传 `--body-file` 会生成正文骨架，之后再编辑：
